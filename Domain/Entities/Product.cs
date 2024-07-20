@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain
+namespace Domain.Models
 {
     public class Product
     {
@@ -15,21 +15,5 @@ namespace Domain
         public int Stock { get; set; }
         public float Price { get; set; }
         public string State { get; set; }
-        public List<Order> Orders { get; set; } = new List<Order>();
-
-        public void CreateProduct()
-        {
-            // Lógica para crear el producto
-        }
-
-        public void ModifyProduct()
-        {
-            // Lógica para modificar el producto
-        }
-
-        public void DeleteProduct()
-        {
-            // Lógica para eliminar el producto
-        }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain
+namespace Domain.Models
 {
     public class Customer : User
     {
@@ -20,9 +20,11 @@ namespace Domain
             Orders.Remove(order);
         }
 
-        public void CreateAccount()
+        public void CreateAccount(string name, string email, string password)
         {
-            // Lógica para crear una cuenta
+            Name = name;
+            Email = email;
+            Password = password;
         }
     }
 }
