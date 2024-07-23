@@ -14,10 +14,8 @@ namespace Domain.Models
         public string Password { get; set; }
         public string Role { get; set; } 
 
-
         public bool VerifyCredentials(string email, string password)
         {
-            // Aquí iría la lógica para verificar las credenciales
             return Email == email && Password == password;
         }
     }

@@ -16,7 +16,6 @@ namespace Web.Controllers
             _productService = productService;
         }
 
-        // Este endpoint requiere que el usuario esté autenticado y tenga el rol de 'Admin' o 'SuperAdmin'
         [HttpPost]
         [Authorize(Roles = "Admin, SuperAdmin")]
         public IActionResult CreateProduct([FromBody] ProductDto productDto)
@@ -25,7 +24,6 @@ namespace Web.Controllers
             return Ok();
         }
 
-        // Este endpoint requiere que el usuario esté autenticado y tenga el rol de 'Admin' o 'SuperAdmin'
         [HttpPut]
         [Authorize(Roles = "Admin, SuperAdmin")]
         public IActionResult UpdateProduct([FromBody] ProductDto productDto)
@@ -34,7 +32,6 @@ namespace Web.Controllers
             return Ok();
         }
 
-        // Este endpoint requiere que el usuario esté autenticado y tenga el rol de 'Admin' o 'SuperAdmin'
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin, SuperAdmin")]
         public IActionResult DeleteProduct(int id)
@@ -43,7 +40,6 @@ namespace Web.Controllers
             return Ok();
         }
 
-        // Este endpoint puede ser accedido por cualquier usuario autenticado
         [HttpGet("{id}")]
         [Authorize]
         public IActionResult GetProductById(int id)
@@ -54,7 +50,6 @@ namespace Web.Controllers
             return Ok(product);
         }
 
-        // Este endpoint puede ser accedido por cualquier usuario autenticado
         [HttpGet]
         [Authorize]
         public IActionResult GetAllProducts()
