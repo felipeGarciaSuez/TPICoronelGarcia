@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Models
 {
-    public class SuperAdmin : User
+    public class SuperAdmin : Admin
     {
         public void CreateAdmin(Admin admin)
         {

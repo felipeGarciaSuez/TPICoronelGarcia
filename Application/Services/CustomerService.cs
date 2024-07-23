@@ -29,12 +29,18 @@ namespace Application.Services
                 Orders = customerDto.Orders.Select(o => new Order
                 {
                     Id = o.Id,
-                    CustomerId = o.CustomerId,
+                    Customer = null,  // Le ponemos null porque despues se lo asignamos
                     DateOrder = o.DateOrder,
                     State = o.State,
                     Total = o.Total
                 }).ToList()
             };
+            //Aca
+            foreach (var order in customer.Orders)
+            {
+                order.Customer = customer;
+            }
+
             _customers.Add(customer);
         }
 
@@ -49,7 +55,7 @@ namespace Application.Services
             customer.Orders = customerDto.Orders.Select(o => new Order
             {
                 Id = o.Id,
-                CustomerId = o.CustomerId,
+                Customer = customer,
                 DateOrder = o.DateOrder,
                 State = o.State,
                 Total = o.Total
@@ -79,7 +85,7 @@ namespace Application.Services
                 Orders = customer.Orders.Select(o => new OrderDto
                 {
                     Id = o.Id,
-                    CustomerId = o.CustomerId,
+                    CustomerId = o.Customer.Id,
                     DateOrder = o.DateOrder,
                     State = o.State,
                     Total = o.Total
@@ -98,7 +104,7 @@ namespace Application.Services
                 Orders = c.Orders.Select(o => new OrderDto
                 {
                     Id = o.Id,
-                    CustomerId = o.CustomerId,
+                    CustomerId = o.Customer.Id,
                     DateOrder = o.DateOrder,
                     State = o.State,
                     Total = o.Total
