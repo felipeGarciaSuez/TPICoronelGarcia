@@ -3,13 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "src\Web.csproj", "{966D4E4A-9D9C-46F0-9FF2-1A4F556E33DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Web.csproj", "{966D4E4A-9D9C-46F0-9FF2-1A4F556E33DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{95A49C7A-443B-45ED-AF76-D842B22D22E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{95A49C7A-443B-45ED-AF76-D842B22D22E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{BD05C430-3100-465E-9F4A-6CE12642DAD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{BD05C430-3100-465E-9F4A-6CE12642DAD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure", "Infraestructure\Infraestructure.csproj", "{23C37821-928C-49AD-BD40-37370F21B91D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infraestructure", "Infraestructure\Infraestructure.csproj", "{23C37821-928C-49AD-BD40-37370F21B91D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DA4E5141-7409-49C3-9B10-91A4EB86394C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{544FB044-EC3C-4034-89C6-9647F650696A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\Coronel-GarciaSuez (1).drawio = ..\..\..\Desktop\Coronel-GarciaSuez (1).drawio
+		..\..\..\Desktop\MINUTA DE RELEVAMIENTO.md = ..\..\..\Desktop\MINUTA DE RELEVAMIENTO.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +44,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{966D4E4A-9D9C-46F0-9FF2-1A4F556E33DD} = {DA4E5141-7409-49C3-9B10-91A4EB86394C}
+		{95A49C7A-443B-45ED-AF76-D842B22D22E8} = {DA4E5141-7409-49C3-9B10-91A4EB86394C}
+		{BD05C430-3100-465E-9F4A-6CE12642DAD4} = {DA4E5141-7409-49C3-9B10-91A4EB86394C}
+		{23C37821-928C-49AD-BD40-37370F21B91D} = {DA4E5141-7409-49C3-9B10-91A4EB86394C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A31029AC-171E-4C24-BDD6-F4B09C0D3574}
