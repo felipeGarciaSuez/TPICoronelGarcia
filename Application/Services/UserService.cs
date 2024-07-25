@@ -6,19 +6,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.Interfaces;
 
 namespace Application.Services
 {
     public class UserService : IUserService
     {
-        private readonly List<User> _users;
+        private readonly IUserRepository _userRepository;
 
-        public UserService()
+        public UserService(IUserRepository userRepository)
         {
-            _users = new List<User>();
+            _userRepository = userRepository;
         }
 
-        public void RegisterUser(UserDto userDto)
+        public async void RegisterUser(UserDto userDto)
         {
             var user = new User
             {
@@ -27,13 +28,17 @@ namespace Application.Services
                 Email = userDto.Email,
                 Password = userDto.Password
             };
-            _users.Add(user);
+
+            await _userRepository.AddUserAsync(user);
         }
 
-        public UserDto Login(string email, string password)
+        public async Task<UserDto> Login(string email, string password)
         {
-            var user = _users.SingleOrDefault(u => u.Email == email && u.Password == password);
-            if (user == null) return null;
+            var user = await _userRepository.GetUserByEmailAndPasswordAsync(email, password);
+            if (user == null)
+            {
+                return null;
+            }
 
             return new UserDto
             {
@@ -43,13 +48,15 @@ namespace Application.Services
             };
         }
 
-        public IEnumerable<UserDto> GetAllUsers()
+        public async Task<IEnumerable<UserDto>> GetAllUsers()
         {
-            return _users.Select(u => new UserDto
+            var users = await _userRepository.GetAllUsersAsync();
+
+            return users.Select(user => new UserDto
             {
-                Id = u.Id,
-                Name = u.Name,
-                Email = u.Email
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email
             }).ToList();
         }
     }

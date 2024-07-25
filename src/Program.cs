@@ -3,6 +3,8 @@ using Application.Services;
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
 //using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Infraestructure;
+using Domain.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,8 @@ builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<ISuperAdminService, SuperAdminService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 //// Configure JWT Authentication
 //var key = Encoding.ASCII.GetBytes("YourSecretKeyHere");
 //builder.Services.AddAuthentication(options =>
@@ -38,6 +42,9 @@ builder.Services.AddScoped<IAdminService, AdminService>();
 
 //// Add authorization
 //builder.Services.AddAuthorization();
+
+builder.Services.AddDbContext<AplicattionContext>(dbContextOptions => dbContextOptions.UseSqlite(
+builder.Configuration["ConnectionStrings:TPICoronelGarciaDBConnectionString"]));
 
 var app = builder.Build();
 
