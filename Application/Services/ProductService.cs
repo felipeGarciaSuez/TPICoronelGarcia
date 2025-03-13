@@ -1,5 +1,6 @@
 ﻿using Application.DTO;
 using Application.IServices;
+using Domain.Interfaces;
 using Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,14 @@ namespace Application.Services
 {
     public class ProductService : IProductService
     {
-        private readonly List<Product> _products;
+        private readonly IProductRepository _productRepository;
 
-        public ProductService()
+        public ProductService(IProductRepository productRepository)
         {
-            _products = new List<Product>();
+            _productRepository = productRepository;
         }
 
-        public void CreateProduct(ProductDto productDto)
+        public async Task CreateProduct(ProductDto productDto)
         {
             var product = new Product
             {
@@ -30,12 +31,12 @@ namespace Application.Services
                 Price = productDto.Price,
                 State = productDto.State
             };
-            _products.Add(product);
+            await _productRepository.AddAsync(product);  // Usamos await para métodos asincrónicos
         }
 
-        public void UpdateProduct(ProductDto productDto)
+        public async Task UpdateProduct(ProductDto productDto)
         {
-            var product = _products.SingleOrDefault(p => p.Id == productDto.Id);
+            var product = await _productRepository.GetByIdAsync(productDto.Id);  // Usamos await para obtener el producto
             if (product == null) return;
 
             product.Name = productDto.Name;
@@ -44,20 +45,22 @@ namespace Application.Services
             product.Stock = productDto.Stock;
             product.Price = productDto.Price;
             product.State = productDto.State;
+
+            await _productRepository.UpdateAsync(product);  // Usamos await para actualizar el producto
         }
 
-        public void DeleteProduct(int productId)
+        public async Task DeleteProduct(int productId)
         {
-            var product = _products.SingleOrDefault(p => p.Id == productId);
+            var product = await _productRepository.GetByIdAsync(productId);  // Usamos await para obtener el producto
             if (product != null)
             {
-                _products.Remove(product);
+                await _productRepository.DeleteAsync(productId);  // Usamos await para eliminar el producto
             }
         }
 
-        public ProductDto GetProductById(int productId)
+        public async Task<ProductDto> GetProductById(int productId)
         {
-            var product = _products.SingleOrDefault(p => p.Id == productId);
+            var product = await _productRepository.GetProductByIdAsync(productId);  // Usamos await para obtener el producto
             if (product == null) return null;
 
             return new ProductDto
@@ -72,9 +75,10 @@ namespace Application.Services
             };
         }
 
-        public IEnumerable<ProductDto> GetAllProducts()
+        public async Task<IEnumerable<ProductDto>> GetAllProducts()
         {
-            return _products.Select(p => new ProductDto
+            var products = await _productRepository.GetAllProductsAsync();  // Usamos await para obtener todos los productos
+            return products.Select(p => new ProductDto
             {
                 Id = p.Id,
                 Name = p.Name,

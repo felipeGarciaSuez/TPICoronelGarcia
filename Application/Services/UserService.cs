@@ -19,45 +19,29 @@ namespace Application.Services
             _userRepository = userRepository;
         }
 
-        public async void RegisterUser(UserDto userDto)
+        public async Task<UserDto> Login(string email, string password)
+        {
+            var user = await _userRepository.GetUserByEmailAndPasswordAsync(email, password);
+            return user != null ? new UserDto { Id = user.Id, Name = user.Name, Email = user.Email } : null;
+        }
+
+        public async Task<IEnumerable<UserDto>> GetAllUsers()
+        {
+            var users = await _userRepository.GetAllUsersAsync();
+            return users.Select(user => new UserDto { Id = user.Id, Name = user.Name, Email = user.Email });
+        }
+
+        public async Task RegisterUser(UserDto userDto)
         {
             var user = new User
             {
                 Id = userDto.Id,
                 Name = userDto.Name,
                 Email = userDto.Email,
-                Password = userDto.Password
+                Password = userDto.Password // Hash en un futuro
             };
 
             await _userRepository.AddUserAsync(user);
-        }
-
-        public async Task<UserDto> Login(string email, string password)
-        {
-            var user = await _userRepository.GetUserByEmailAndPasswordAsync(email, password);
-            if (user == null)
-            {
-                return null;
-            }
-
-            return new UserDto
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email
-            };
-        }
-
-        public async Task<IEnumerable<UserDto>> GetAllUsers()
-        {
-            var users = await _userRepository.GetAllUsersAsync();
-
-            return users.Select(user => new UserDto
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email
-            }).ToList();
         }
     }
 }

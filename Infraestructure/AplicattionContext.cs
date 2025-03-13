@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infraestructure
 {
-    internal class AplicattionContext : DbContext
+    public class AplicattionContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }

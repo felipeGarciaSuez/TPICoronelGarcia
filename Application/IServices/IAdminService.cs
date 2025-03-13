@@ -1,19 +1,16 @@
 ﻿using Application.DTO;
 using Domain.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.IServices
 {
     public interface IAdminService
     {
-        void CreateProduct(Product product);
-        void ModifyProduct(Product product);
-        void DeleteProduct(int productId);
-        UserDto GetUserById(int userId);
-        IEnumerable<UserDto> GetAllUsers();
+        Task<Product> CreateProduct(Product product);
+        Task ModifyProduct(Product product);
+        Task DeleteProduct(int productId);
+        Task<UserDto> GetUserById(int userId);
+        Task<IEnumerable<UserDto>> GetAllUsers();
     }
 }

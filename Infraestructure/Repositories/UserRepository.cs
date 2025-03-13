@@ -11,9 +11,9 @@ namespace Infraestructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AplicattionContext _context;
 
-        public UserRepository(ApplicationDbContext context)
+        public UserRepository(AplicattionContext context)
         {
             _context = context;
         }

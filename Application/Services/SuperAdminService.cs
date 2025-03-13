@@ -1,4 +1,5 @@
 ﻿using Application.IServices;
+using Domain.Interfaces;
 using Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace Application.Services
     public class SuperAdminService : AdminService, ISuperAdminService
     {
         private readonly List<Admin> _admins;
+        private readonly IUserRepository _userRepository;
 
         public SuperAdminService()
         {
             _admins = new List<Admin>();
+            _userRepository = _userRepository
         }
 
         public void CreateAdmin(Admin admin)
@@ -24,7 +27,7 @@ namespace Application.Services
 
         public void ModifyUser(User user)
         {
-            var existingUser = _users.SingleOrDefault(u => u.Id == user.Id);
+            var existingUser = _admins_admins.SingleOrDefault(u => u.Id == user.Id);
             if (existingUser == null) return;
 
             existingUser.Name = user.Name;
@@ -34,10 +37,10 @@ namespace Application.Services
 
         public new void DeleteUser(int userId)
         {
-            var user = _users.SingleOrDefault(u => u.Id == userId);
+            var user = _admins.SingleOrDefault(u => u.Id == userId);
             if (user != null)
             {
-                _users.Remove(user);
+                _admins.Remove(user);
             }
         }
     }

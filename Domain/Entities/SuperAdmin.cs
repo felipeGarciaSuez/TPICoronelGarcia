@@ -8,20 +8,6 @@ namespace Domain.Models
 {
     public class SuperAdmin : Admin
     {
-        public void CreateAdmin(Admin admin)
-        {
-            // Lógica para crear un administrador
-        }
-
-        public void ModifyUser(User user)
-        {
-            // Lógica para modificar un usuario
-        }
-
-        public void DeleteUser(User user)
-        {
-            // Lógica para eliminar un usuario
-        }
     }
 }
 
